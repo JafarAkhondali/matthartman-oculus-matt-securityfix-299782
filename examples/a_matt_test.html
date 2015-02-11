@@ -72,9 +72,19 @@
 		<div id="container"></div>
 
 		<script>
+			var globalElement = Array();
+			
+			var employees = Array();
+			employees[0] = Array();
+			employees[0]["name"] = "Matt";
+			employees[0]["img"] = "https://s3.amazonaws.com/backstage-assets/people/josh_aurebach.jpg";
+			employees[1] = Array();
+			employees[1]["name"] = "Matt";
+			employees[1]["img"] = "https://s3.amazonaws.com/backstage-assets/people/josh_aurebach.jpg";
+			
 
 			var table = [
-				"H", "Hydrogen", "1.00794", 1, 1,
+				"employee", "one", "https://s3.amazonaws.com/backstage-assets/people/josh_aurebach.jpg", 1, 1,
 				"He", "Helium", "4.002602", 18, 1,
 				"Li", "Lithium", "6.941", 1, 2,
 				"Be", "Beryllium", "9.012182", 2, 2,
@@ -213,28 +223,19 @@
 				scene = new THREE.Scene();
 
 				// define the table
-
-				for ( var i = 0; i < table.length; i += 5 ) {
+				for ( var i = 0; i < employees.length; i++ ) {
 
 					var element = document.createElement( 'div' );
 					element.className = 'element';
 					//element.style.backgroundColor = 'rgba(0,127,127,' + ( Math.random() * 0.5 + 0.25 ) + ')';
-					element.style.background = "url('https://d1qb2nb5cznatu.cloudfront.net/startups/i/32061-55de567227c5128b8f689b1ba0c69ab1-medium_jpg.jpg?buster=1404139329')";
-
-					var number = document.createElement( 'div' );
-					number.className = 'number';
-					number.textContent = (i/5) + 1;
-					element.appendChild( number );
+					//element.style.background = "url('" + employees[i]["img"] + "') ";
 
 					var symbol = document.createElement( 'div' );
 					symbol.className = 'symbol';
-					symbol.textContent = table[ i ];
+					symbol.innerHTML = "<img src='" + employees[i]["img"] + "' width=200>";
 					element.appendChild( symbol );
 
-					var details = document.createElement( 'div' );
-					details.className = 'details';
-					details.innerHTML = table[ i + 1 ] + '<br>' + table[ i + 2 ];
-					element.appendChild( details );
+					globalElement[i] = element;
 
 					var object = new THREE.CSS3DObject( element );
 					object.position.x = Math.random() * 4000 - 2000;
